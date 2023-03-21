@@ -1,0 +1,25 @@
+{% extends "layout.html"%}
+
+{%block content%}
+
+<div class="col-xs-6">
+    <br><br>
+    <!--Pintar el formulario utilizando el macro creado
+    __ datos privados
+    -->
+    {% from "_macros.html" import render_field %} 
+    <form action="/traductor" method="post" novalidate>
+        <input type="hidden" name="csrf_token" value="{{csrf_token()}}">
+    <div class="row control-group">
+      
+            {{render_field(form.username)}}
+            {{render_field(form.password)}}
+       
+        <input type="submit" value="Registrar">
+    </div>
+
+    
+
+</form>
+
+{%endblock%}

@@ -1,0 +1,6 @@
+marron,marron,gris,oro
+amarillo,naranja,rojo,plata
+negro,negro,negro,oro
+azul,rojo,verde,plata
+azul,rojo,verde,plata
+azul,amarillo,verde,oro

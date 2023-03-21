@@ -1,0 +1,185 @@
+{% extends "layout.html" %}
+{% block content %}
+<style>
+    .opcion-negro {
+        background-color: black;
+        color: white;
+    }
+
+    .opcion-marron {
+        background-color: brown;
+        color: white;
+    }
+
+    .opcion-rojo {
+        background-color: red;
+        color: white;
+    }
+
+    .opcion-naranja {
+        background-color: orange;
+        color: white;
+    }
+
+    .opcion-amarillo {
+        background-color: yellow;
+    }
+
+    .opcion-verde {
+        background-color: green;
+        color: white;
+    }
+
+    .opcion-azul {
+        background-color: blue;
+        color: white;
+    }
+
+    .opcion-violeta {
+        background-color: purple;
+        color: white;
+    }
+
+    .opcion-gris {
+        background-color: gray;
+        color: white;
+    }
+
+    .opcion-blanco {
+        background-color: white;
+    }
+</style>
+
+<center>
+    <h1>Calculadora de resistencias</h1>
+</center>
+<div class="container">
+    <div class="row justify-content-start ">
+        <div class="col-3">
+            <img src="https://www.electrontools.com/Home/WP/wp-content/uploads/2019/04/esistencia-de-4-bandas.jpg"
+                alt="Resistencia de 4 bandas" height="200" width="400">
+        </div>
+        <div class="col-2">
+            <div>
+                <!-- Formulario para ingresar los valores de las bandas y la tolerancia -->
+                <form method="POST">
+                    {{ form.hidden_tag() }}
+
+                    <div class="form-group">
+                        {{ form.banda1.label }}
+                        {{ form.banda1(class="selectpicker form-control", data_style="btn-primary",
+                        data_live_search="true")
+                        }}
+                    </div>
+
+                    <div class="form-group">
+                        {{ form.banda2.label }}
+                        {{ form.banda2(class="selectpicker form-control", data_style="btn-primary",
+                        data_live_search="true")
+                        }}
+                    </div>
+
+                    <div class="form-group">
+                        {{ form.banda3.label }}
+                        {{ form.banda3(class="selectpicker form-control", data_style="btn-primary",
+                        data_live_search="true")
+                        }}
+                    </div>
+
+                    <div class="form-group">
+                        {{ form.tolerancia.label }}
+                        <br>
+                        {{ form.tolerancia(class="radio-inline") }} {{
+                        form.tolerancia.label(class="radio-inline") }}
+                    </div>
+
+                    <div class="form-group">
+                        {{ form.calcular(class="btn btn-primary") }}
+                    </div>
+                </form>
+
+            </div>
+        </div>
+        <div class="col-7 ">
+
+            {% if resultado %}
+            <hr>
+            <h2>Resultado</h2>
+
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Banda 1</th>
+                        <th>Banda 2</th>
+                        <th>Banda 3</th>
+                        <th>Tolerancia</th>
+                        <th>Valor</th>
+                        <th>Valor mínimo</th>
+                        <th>Valor máximo</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="background-color: {{ resultado['colorBanda1'] }}; color: white;">{{
+                            resultado['banda1'] }}</td>
+                        <td style="background-color: {{ resultado['colorBanda2'] }}; color: white;">{{
+                            resultado['banda2'] }}</td>
+                        <td style="background-color: {{ resultado['colorBanda3'] }}; color: white;">{{
+                            resultado['banda3'] }}</td>
+                        <td style="background-color: {{ resultado['colorTolerancia'] }}; color: white;">{{
+                            resultado['tolerancia'] }}</td>
+                        <td>{{ resultado['valor'] }}</td>
+                        <td>{{ resultado['valor_minimo'] }}</td>
+                        <td>{{ resultado['valor_maximo'] }}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="form-group">
+            </div>
+            {% endif %}
+        </div>
+        
+    </div>
+</div>
+
+
+   {% if valores_guardados %}
+    <center>
+        <h2>Valores guardados:</h2>
+    </center>
+    <br><br>
+    <table class="table table-striped">
+        <tr>
+            <th>Banda 1</th>
+            <th>Banda 2</th>
+            <th>Banda 3</th>
+            <th>Tolerancia</th>
+            <th>Valor</th>
+            <th>Valor mínimo</th>
+            <th>Valor máximo</th>
+        </tr>
+        {% for resultado_guardado in valores_guardados %}
+        <tr>
+            <td style="background-color: {{ resultado_guardado['colorBanda1'] }}; color: white;">{{
+                resultado_guardado.banda1 }}</td>
+            <td style="background-color: {{ resultado_guardado['colorBanda2'] }}; color: white;">{{
+                resultado_guardado.banda2 }}</td>
+            <td style="background-color: {{ resultado_guardado['colorBanda3'] }}; color: white;">{{
+                resultado_guardado.banda3 }}</td>
+            <td style="background-color: {{ resultado_guardado['colorTolerancia'] }}; color: white;">{{
+                resultado_guardado.tolerancia}}</td>
+            <td>{{ resultado_guardado['valor'] }}</td>
+            <td>{{ resultado_guardado['valor_minimo'] }}</td>
+            <td>{{ resultado_guardado['valor_maximo'] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% endif %}
+    
+    
+    
+
+
+
+
+{% endblock %}
